@@ -15,18 +15,18 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const hasUserId = localStorage.getItem('@TicketScraper:userId');
+  const token = localStorage.getItem('@TicketScraper:token');
 
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => {
-        return isPrivate === !!hasUserId ? (
+        return isPrivate === !!token ? (
           <Component />
         ) : (
           <Redirect
             to={{
-              pathname: hasUserId ? '/home' : '/',
+              pathname: token ? '/home' : '/',
               state: {
                 from: location,
               },

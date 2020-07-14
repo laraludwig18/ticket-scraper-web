@@ -1,4 +1,4 @@
 ### TODO:
 
-- [] Tratar erros
+- [x] Tratar erros
 - [] Melhorar README

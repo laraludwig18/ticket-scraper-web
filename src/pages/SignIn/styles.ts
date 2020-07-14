@@ -36,6 +36,11 @@ export const Container = styled.div`
   }
 `;
 
+export const Error = styled.p`
+  margin-top: 5px;
+  color: #b2433b;
+`;
+
 export const Input = styled.input`
   background: #1b1d23;
   color: #fff;

@@ -4,17 +4,30 @@ import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import base64encode from '../../utils/base64encode';
 
-import { Button, Container, Input } from './styles';
+import { Button, Container, Input, Error } from './styles';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+
+      if (!email) {
+        setError('Email obrigatório');
+        return;
+      }
+
+      if (!password) {
+        setError('Senha obrigatória');
+        return;
+      }
+
+      setError('');
 
       const encodedPassword = base64encode(password);
 
@@ -24,11 +37,11 @@ const SignIn: React.FC = () => {
           password: encodedPassword,
         });
 
-        localStorage.setItem('@TicketScraper:userId', data.userId);
+        localStorage.setItem('@TicketScraper:token', data.token);
 
         history.push('/home');
       } catch (err) {
-        //
+        setError('Ocorreu um erro, cheque as credenciais.');
       }
     },
     [history, email, password],
@@ -62,6 +75,8 @@ const SignIn: React.FC = () => {
           placeholder="Digite sua senha"
           onChange={onChangePassword}
         />
+
+        {error && <Error>{error}</Error>}
 
         <Button type="submit">Entrar</Button>
       </form>

@@ -39,11 +39,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function getInitialData() {
-      const userId = localStorage.getItem('@TicketScraper:userId');
-
       const [userResponse, statementResponse] = await Promise.all([
-        api.get(`/ticket/user/${userId}`),
-        api.get<ICardStatement[]>(`/ticket/statement/${userId}`),
+        api.get('/ticket/user'),
+        api.get<ICardStatement[]>('/ticket/statement'),
       ]);
 
       const formattedCardStatement = statementResponse.data.map(
