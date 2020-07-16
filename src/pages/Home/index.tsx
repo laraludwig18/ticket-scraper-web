@@ -12,7 +12,6 @@ import {
 } from './styles';
 
 interface IUser {
-  id: string;
   name: string;
   email: string;
   phoneNumber: string;
